@@ -1,8 +1,19 @@
+import { Route, BrowserRouter as Router, Routes  } from "react-router-dom";
+
 const App = () => {
   return (
-    <div>
-        <h1 className="text-5xl text-slate-500 font-bold underline"> Three Js! !</h1>
-    </div>
+    <main className=" bg-slate-300/20">
+    <Router>
+        <Navbar />
+        <Routes>
+            <Route path="/" element={"Home"} />
+                  <Route path="/about" element={"about"} />
+            <Route path="/project" element={"project"} />
+                  <Route path="/contact" element={"contact"} />
+        </Routes>
+    </Router>
+
+    </main>
   )
 }
 
