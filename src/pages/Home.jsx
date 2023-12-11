@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber"
 import { Suspense, useState } from "react"
 import Loader from "../components/Loader"
-import Island from "../models/Island";''
+import Island from "../models/Island"; ''
 import Sky from "../models/Sky";
 import Bird from "../models/Bird";
 import Plane from "../models/Plane";
@@ -12,16 +12,27 @@ const Home = () => {
     let screenPosition = [0, -6.5, -43];
     let rotation = [0.1, 4.7, 0];
 
-    if (window.innerWidth < 768) {
-      screenScale = [0.9, 0.9, 0, 9];
-    }
-    else {
-      screenScale = [1, 1, 1];
-    }
+    if (window.innerWidth < 768) { screenScale = [0.9, 0.9, 0.9]; }
+    else { screenScale = [1, 1, 1]; }
     return [screenScale, screenPosition, rotation];
   }
 
+  const adjustPlanForScreenSize = () => {
+    let screenScale, screenPosition;
+
+    if (window.innerWidth < 768) {
+      screenScale = [1.7, 1.7, 1.7];
+      screenPosition = [0, -1.5, 0];
+    }
+    else {
+      screenScale = [4, 4, 4];
+      screenPosition = [0, -4, -4];
+    }
+    return [screenScale, screenPosition];
+  }
+
   const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
+  const [planeScale, planePosition] = adjustPlanForScreenSize();
   const [isRotating, setIsRotating] = useState(false);
   return (
     <section className="w-full h-screen relative">
@@ -36,28 +47,32 @@ const Home = () => {
         <Suspense fallback={<Loader />}>
 
           <directionalLight position={[1, 1, 1]} intensity={0} />
-          <ambientLight intensity={0.4}/>
-          
+          <ambientLight intensity={0.4} />
+
           {/* <pointLight /> // emits light in all direction from a single source */}
-          
 
           {/* <spotLight /> //similar to point light, emits light from one direction but in a shape of a cone hence angle can be adjusted */}
-          
-          <hemisphereLight 
+
+          <hemisphereLight
             groundColor="#000000"
             skyColor="#b1d1ff"
             intensity={1}
-           />
+          />
 
-          <Sky />
           <Bird />
-          <Plane />
+          <Sky />
           <Island
             position={islandPosition}
             scale={islandScale}
             rotation={islandRotation}
-            isRotating = {isRotating}
-            setIsRotating = {setIsRotating}
+            isRotating={isRotating}
+            setIsRotating={setIsRotating}
+          />
+          <Plane
+            planeScale={planeScale}
+            planePosition={planePosition}
+            isRotating={isRotating}
+            rotation={[0, 20, 0]}
           />
 
 
