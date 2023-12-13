@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import arrow from '../assets/icons/arrow.svg';
 
@@ -20,17 +20,24 @@ const renderContent = {
         </h1>
     ),
     2: (
-        <InfoBox 
-            text={"As a MERN stack expert and passionate React Native enthusiast, 🌟 I've brought enchantment to various projects, crafting tech wonders for companies and individuals alike! ✨"}
+        <InfoBox
+            text={"Crafting digital marvels with code, I'm a software engineer transforming ideas into extraordinary tech solutions.✨"}
             link={"/about"}
             btnText={'Learn more'}
         />
     ),
     3: (
-        <h1>3</h1>
-    ),
+        <InfoBox
+            text={"Dive into my world of innovation! From sleek web interfaces to robust mobile solutions, my projects blend creativity and functionality seamlessly.🌟"}
+            link={"/projects"}
+            btnText={'Visit my portfolio'}
+        />),
     4: (
-        <h1>4</h1>
+        <InfoBox
+            text={"Need a project to come to life? Seeking a software developer? I'm here, just a few keystrokes away,ready to bring your ideas to life! ✨"}
+            link={"/contact"}
+            btnText={"Let's talk about your ideas"}
+        />
     ),
 }
 const HomeInfo = ({ currentStage }) => {
