@@ -12,17 +12,16 @@ const Contact = () => {
   const [currentAnimation, setCurrentAnimation] = useState('idle');
 
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleFocus = (e) => setCurrentAnimation('walk');
 
   const handleBlur = () => setCurrentAnimation('idle');
-  const handleSubmit = () => {
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
     setCurrentAnimation('hit');
+    setIsLoading(true);
 
     emailjs.send(
       import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
@@ -37,6 +36,11 @@ const Contact = () => {
       import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
     ).then(() => {
       setIsLoading(false);
+
+      setTimeout(() => {
+        setCurrentAnimation('idle');
+        setForm({ name: '', email: '', message: '' });
+      }, 3000);
     }).catch((err) => {
       setIsLoading(false);
       setCurrentAnimation('idle');
@@ -71,17 +75,16 @@ const Contact = () => {
             />
           </label>
           <label className='text-black-500 font-semibold' >Your message
-            <textarea name="message" className='input'
+            <textarea name="message" className='textarea' rows={4}
               placeholder='Tell me about your ideas'
               required
-              value={form.name}
+              value={form.message}
               onChange={handleChange}
               onFocus={handleFocus}
               onBlur={handleBlur}
             />
           </label>
           <button className='btn' type='submit'
-          onClick={handleSubmit}
             disabled={isLoading}
             onFocus={handleFocus} onBlur={handleBlur}>
             {isLoading ? 'Sending...' : 'Send Message'}
@@ -103,7 +106,7 @@ const Contact = () => {
 
           <Suspense fallback={<Loader />}>
             <Fox
-            currentAnimation={currentAnimation}
+              currentAnimation={currentAnimation}
               position={[0.5, 0.35, 0]}
               rotation={[12.5, -0.7, 0]}
               scale={[0.55, 0.55, 0.55]} />
