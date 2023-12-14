@@ -9,20 +9,20 @@ const Contact = () => {
   const formRef = useRef(null);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
+  const [currentAnimation, setCurrentAnimation] = useState('idle');
+
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  const handleFocus = (e) => {
+  const handleFocus = (e) => setCurrentAnimation('walk');
 
-  }
-  const handleBlur = () => {
-
-  }
+  const handleBlur = () => setCurrentAnimation('idle');
   const handleSubmit = () => {
     e.preventDefault();
     setIsLoading(true);
+    setCurrentAnimation('hit');
 
     emailjs.send(
       import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
@@ -37,8 +37,9 @@ const Contact = () => {
       import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
     ).then(() => {
       setIsLoading(false);
-
-      setForm({ name: '', email: '', message: '' });
+    }).catch((err) => {
+      setIsLoading(false);
+      setCurrentAnimation('idle');
     })
   }
 
@@ -80,6 +81,7 @@ const Contact = () => {
             />
           </label>
           <button className='btn' type='submit'
+          onClick={handleSubmit}
             disabled={isLoading}
             onFocus={handleFocus} onBlur={handleBlur}>
             {isLoading ? 'Sending...' : 'Send Message'}
@@ -96,13 +98,15 @@ const Contact = () => {
           }}
         >
           <directionalLight intensity={2} position={[0, 0, 1]} />
+          <ambientLight intensity={0.5} />
 
 
           <Suspense fallback={<Loader />}>
             <Fox
+            currentAnimation={currentAnimation}
               position={[0.5, 0.35, 0]}
               rotation={[12.5, -0.7, 0]}
-              scale={[0.5, 0.5, 0.5]} />
+              scale={[0.55, 0.55, 0.55]} />
           </Suspense>
         </Canvas>
       </div>
