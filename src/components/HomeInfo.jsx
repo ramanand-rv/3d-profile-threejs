@@ -34,7 +34,7 @@ const renderContent = {
         />),
     4: (
         <InfoBox
-            text={"Need a project to come to life? Seeking a software developer? I'm here, just a few keystrokes away,ready to bring your ideas to life! ✨"}
+            text={"Need a project to come to life? Seeking a software developer? I'm here, just a few keystrokes away, ready to bring your ideas to life! ✨"}
             link={"/contact"}
             btnText={"Let's talk about your ideas"}
         />
