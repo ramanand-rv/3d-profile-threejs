@@ -1,13 +1,34 @@
 import { Canvas } from "@react-three/fiber"
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
 import Loader from "../components/Loader"
 import Island from "../models/Island"; ''
 import Sky from "../models/Sky";
 import Bird from "../models/Bird";
 import Plane from "../models/Plane";
 import HomeInfo from "../components/HomeInfo";
+import got from '../assets/got.mp3'
+import soundon from '../assets/icons/soundon.png';
+import soundoff from '../assets/icons/soundoff.png';
 
 const Home = () => {
+  const audioRef = useRef(new Audio(got));
+  audioRef.current.volume = 0.4;
+  audioRef.current.loop = true;
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
+
+  useEffect(() => {
+    if(isMusicPlaying){
+      audioRef.current.play();
+    }
+    return () => {
+      audioRef.current.pause();
+    }
+  },[isMusicPlaying]);
+
+  const prevenRightClick = (e) => {
+    e.preventDefault();
+  }
+
   const [currentStage, setCurrentStage] = useState(1);
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
@@ -37,7 +58,7 @@ const Home = () => {
   const [planeScale, planePosition] = adjustPlanForScreenSize();
   const [isRotating, setIsRotating] = useState(false);
   return (
-    <section className="w-full h-screen relative">
+    <section onContextMenu={prevenRightClick} className="w-full h-screen relative">
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <HomeInfo currentStage={currentStage} />}
       </div>
@@ -78,16 +99,14 @@ const Home = () => {
             rotation={[0, 20, 0]}
           />
 
-
-
         </Suspense>
-
-
       </Canvas>
 
-
-
-
+      <div className="absolute bottom-2 left-2">
+        <img src={!isMusicPlaying ? soundoff : soundon} alt="sound"
+        className=" w-10 h-10 cursor-pointer object-contain"
+        onClick={() => setIsMusicPlaying(!isMusicPlaying)} />
+      </div>
     </section>
   )
 }
