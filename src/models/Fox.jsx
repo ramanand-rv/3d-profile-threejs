@@ -6,8 +6,8 @@ Source: https://sketchfab.com/3d-models/fox-f372c04de44640fbb6a4f9e4e5845c78
 Title: Fox
 */
 
+import { useAnimations, useGLTF } from "@react-three/drei";
 import React, { useEffect, useRef } from "react";
-import { useGLTF, useAnimations } from "@react-three/drei";
 import scene from '../assets/3d/fox.glb';
 
 const Fox = ({ currentAnimation, ...props }) => {

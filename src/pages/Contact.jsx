@@ -1,10 +1,10 @@
-import React, { Suspense, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { Canvas } from '@react-three/fiber';
-import Loader from '../components/Loader';
-import Fox from '../models/Fox';
-import useAlert from '../hooks/useAlert';
+import React, { Suspense, useRef, useState } from 'react';
 import Alert from '../components/Alert';
+import Loader from '../components/Loader';
+import useAlert from '../hooks/useAlert';
+import Fox from '../models/Fox';
 
 
 const Contact = () => {
@@ -13,7 +13,7 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState('idle');
 
-  const {alert, showAlert, hideAlert} = useAlert();
+  const { alert, showAlert, hideAlert } = useAlert();
 
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -40,7 +40,7 @@ const Contact = () => {
       import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
     ).then(() => {
       setIsLoading(false);
-      showAlert({show:true, text: 'Message sent successfully!'});
+      showAlert({ show: true, text: 'Message sent successfully!' });
 
       setTimeout(() => {
         setCurrentAnimation('idle');
@@ -50,7 +50,7 @@ const Contact = () => {
     }).catch((err) => {
       setIsLoading(false);
       setCurrentAnimation('idle');
-      showAlert({show:true, text: 'Something went wrong! Try contacting on Twitter/pyaracetamol0mg', type: 'danger'});
+      showAlert({ show: true, text: 'Something went wrong! Try contacting on Twitter/pyaracetamol0mg', type: 'danger' });
     })
   }
 

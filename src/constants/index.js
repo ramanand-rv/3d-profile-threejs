@@ -1,4 +1,3 @@
-import { meta, shopify, starbucks, tesla } from "../assets/images";
 import {
     car,
     contact,
@@ -25,6 +24,7 @@ import {
     threads,
     typescript
 } from "../assets/icons";
+import { meta, shopify, starbucks, tesla } from "../assets/images";
 
 export const skills = [
     {

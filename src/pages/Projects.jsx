@@ -1,8 +1,8 @@
 import React from 'react'
-import { projects } from '../constants'
 import { Link } from 'react-router-dom'
 import { arrow } from '../assets/icons'
 import CTA from '../components/CTA'
+import { projects } from '../constants'
 
 const Projects = () => {
   return (
@@ -13,16 +13,16 @@ const Projects = () => {
 
       <div className="mt-5 gap-3 flex flex-col text-slate-500">
         <p>During my journey, I've been fortunate to work on diverse projects, and some hold a special place in my heart. These projects, open-source and close to me, welcome contributions—feel free to join in and be a part of this collaborative journey🌟.</p>
-      </div>  
+      </div>
 
       <div className="flex flex-wrap my-20 gap-16">
         {projects.map((project) => (
-          <div className="lg:w-[400px] w-full" key={project.name}>  
+          <div className="lg:w-[400px] w-full" key={project.name}>
             <div className="w-12 h-12 block-container">
               <div className={`btn-back rounded-xl ${project.theme}`} />
               <div className='btn-front rounded-xl flex justify-center items-center'>
                 <img src={project.iconUrl} alt="Project Icon"
-                  className='w-1/2 h-1/2 object-contain'  />
+                  className='w-1/2 h-1/2 object-contain' />
               </div>
             </div>
             <div className="mt-5 flex flex-col">
@@ -34,9 +34,9 @@ const Projects = () => {
               </p>
               <div className="mt-5 flx items-center gap-2 font-poppins">
                 <Link to={project.link}
-                target='_blank'
-                rel='noopener norefferrer'
-                className='font-semibold text-blue-600'
+                  target='_blank'
+                  rel='noopener norefferrer'
+                  className='font-semibold text-blue-600'
                 >
                   Live Link
                 </Link>
@@ -48,9 +48,9 @@ const Projects = () => {
       </div>
       <hr className="border-slate-200" />
       <CTA />
-      </section>
-      
-      )
+    </section>
+
+  )
 }
 
-      export default Projects
+export default Projects

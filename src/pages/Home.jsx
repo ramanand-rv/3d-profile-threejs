@@ -1,14 +1,15 @@
-import { Canvas } from "@react-three/fiber"
-import { Suspense, useEffect, useRef, useState } from "react"
-import Loader from "../components/Loader"
-import Island from "../models/Island"; ''
-import Sky from "../models/Sky";
-import Bird from "../models/Bird";
-import Plane from "../models/Plane";
-import HomeInfo from "../components/HomeInfo";
-import got from '../assets/got.mp3'
-import soundon from '../assets/icons/soundon.png';
+import { Canvas } from "@react-three/fiber";
+import { Suspense, useEffect, useRef, useState } from "react";
+import got from '../assets/got.mp3';
 import soundoff from '../assets/icons/soundoff.png';
+import soundon from '../assets/icons/soundon.png';
+import HomeInfo from "../components/HomeInfo";
+import Loader from "../components/Loader";
+import Bird from "../models/Bird";
+import Island from "../models/Island";
+import Plane from "../models/Plane";
+import Sky from "../models/Sky";
+''
 
 const Home = () => {
   const audioRef = useRef(new Audio(got));
@@ -17,13 +18,13 @@ const Home = () => {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
 
   useEffect(() => {
-    if(isMusicPlaying){
+    if (isMusicPlaying) {
       audioRef.current.play();
     }
     return () => {
       audioRef.current.pause();
     }
-  },[isMusicPlaying]);
+  }, [isMusicPlaying]);
 
   const prevenRightClick = (e) => {
     e.preventDefault();
@@ -105,8 +106,8 @@ const Home = () => {
 
       <div className="absolute bottom-2 left-2">
         <img src={!isMusicPlaying ? soundoff : soundon} alt="sound"
-        className=" w-10 h-10 cursor-pointer object-contain"
-        onClick={() => setIsMusicPlaying(!isMusicPlaying)} />
+          className=" w-10 h-10 cursor-pointer object-contain"
+          onClick={() => setIsMusicPlaying(!isMusicPlaying)} />
       </div>
     </section>
   )
